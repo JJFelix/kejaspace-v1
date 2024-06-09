@@ -160,13 +160,13 @@ const FeaturedProperties = () => {
                        </Carousel>
                     <div className='search-bar  justify-content-center'>
                         <form className=' align-items-center   gap-3 searchform' onSubmit={handleSubmit}>
-                            {/* <label htmlFor="houseType">Type: </label> */}
+                            <label htmlFor="houseType">Type: </label>
                             <select name="houseType" id="houseType" className="form-control m-1" value={houseData.houseType} onChange={handleChange} placeholder='House Type'>
                                 <option value="" disabled >Type</option>
                                 <option value="commercial">Commercial</option>
                                 <option value="residential">Residential</option>
                             </select>
-                            {/* <label htmlFor="houseCategory">Category: </label> */}
+                            <label htmlFor="houseCategory">Category: </label>
                             <select name="houseCategory" id="houseCategory" className="form-control m-1" value={houseData.houseCategory} onChange={handleChange}>
                                 <option value="" disabled >Category</option>
                              
@@ -186,12 +186,8 @@ const FeaturedProperties = () => {
                     </div>
                    
                    
-                </div>
-               
-
-                <h1 style={{ textTransform: 'uppercase', marginTop: '-130px', marginBottom : '1px'}}><u>Popular real estate units</u></h1>
-
-
+                </div>              
+                <h1>Popular real estate units</h1>
                 <div className="houses">
                     {/* {searchedProperties.length === 0 && properties.length === 0 ? (
                     <p>Loading...</p>

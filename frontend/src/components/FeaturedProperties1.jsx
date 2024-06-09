@@ -9,7 +9,7 @@ const dummyImage = '/images/sieuwert-otterloo-aren8nutd1Q-unsplash_6aa03d5ded604
 
 import Carousel from 'react-bootstrap/Carousel';
 
-const FeaturedProperties = () => {
+const FeaturedProperties1 = () => {
   const [properties, setProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
 
@@ -94,6 +94,7 @@ const FeaturedProperties = () => {
 
   return (
     <>
+    <h5>fp1</h5>
       <div className='main-card'>
         <div className='carousel d-flex'>
           <Carousel className='tag'>
@@ -189,4 +190,4 @@ const FeaturedProperties = () => {
   );
 };
 
-export default FeaturedProperties;
+export default FeaturedProperties1;

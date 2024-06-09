@@ -3,7 +3,7 @@ import './Footer.css'
 import '../assets/react.svg'
 import { Link } from 'react-router-dom';
 function Footer() {
-    const profileImage = '/images/profile.jpeg'
+    const profileImage = 'image.png'//'/images/profile.jpeg'
     return (
         <footer>
             <div className="footer-content">
