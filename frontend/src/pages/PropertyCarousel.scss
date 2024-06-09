@@ -1,0 +1,132 @@
+.mainWrapper {
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  //background-color: #f0f0f0;
+
+  .carousel-container {
+    position: relative;
+    width: 98%;
+    height: 80%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .carousel {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .property-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        //background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        box-sizing: border-box;
+
+        .text {
+          display: grid;
+          grid-template-columns: 40% 60%;
+          gap: 6%;
+          text-align: left;
+          margin: 3%;
+
+          .left {
+            h1 {
+              color: darkblue;
+              font-weight: 900;
+            }
+            h3 {
+              color: #007bff;
+              font-weight: 400;
+            }
+            h6 {
+              font-weight: 600;
+              color: goldenrod;
+            }
+          }
+          .right {
+            h1 {
+              color: gold;
+              font-weight: 900;
+            }
+            p {
+              color: goldenrod;
+            }
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          position: absolute;
+          border-radius: 5px;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+
+        h2 {
+          margin: 10px 0;
+          color: #333;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #666;
+        }
+
+        .more-info-btn {
+          // margin-top: 10px;
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background: darkblue;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .prev-btn,
+    .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 8px 16px;
+      background-color: transparent;
+      color: #fff;
+      font-size: 2em;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+
+      &.prev-btn {
+        left: 10px;
+      }
+
+      &.next-btn {
+        right: 10px;
+      }
+    }
+  }
+}
