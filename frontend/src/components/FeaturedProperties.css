@@ -1,5 +1,5 @@
 .main-card{
-    /* background-color: lightcoral; */
+    background-color: lightcoral;
     padding: 1px 20px;
     display: flex;
     flex-direction: column;
@@ -17,20 +17,18 @@
     /* background: blue; */
     margin:0 5%;
 }
+
 .search-bar{
-    position: absolute;
-    bottom: 170px;
-    
-    
-    
-    width: 50%;
+    position: relative;
+    top: 170px;       
+    background-color: rgba(0, 0, 0, 0.271);
+    /* width: 50%; */
     padding: 10px;
     display: flex;
     margin: auto;
     border: none;
-    justify-self: center;
+    justify-content: center;
 }
-
 
 .inner-card{
     width: 28%;
@@ -163,7 +161,7 @@
     }
 }
 
-.carousel{
+.carousel2{
     justify-content: center;
     /* background-color: blue; */
     

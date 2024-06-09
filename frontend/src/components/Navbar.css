@@ -87,6 +87,18 @@
   }
 }
 
+@media screen and (max-width: 775px) {
+    .name-logo{
+        margin: auto;
+    }
+
+    .below-500{
+        /* background-color: red; */
+        margin: auto;
+        gap: 10em;
+    }
+}
+
 @media screen and (max-width: 550px) {
   .nav {
     padding: 0.5em;
