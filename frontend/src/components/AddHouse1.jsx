@@ -77,7 +77,7 @@ const AddHouse = () => {
     } else {
       setHouseData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: value || "",
       }));
     }
   };

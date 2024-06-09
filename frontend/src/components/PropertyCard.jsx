@@ -1,53 +1,107 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './FeaturedProperties.css'
+
 
 import { Link } from 'react-router-dom'
 
 const PropertyCard = ({ property, onClick }) => {
-    const { images, location } = property
-    const image1 = images[0]
-    const image2 = images[1]
-    const dummyImage = 'https://picsum.photos/250/150'
-    const dummyImage2 = '/images/sieuwert-otterloo-aren8nutd1Q-unsplash_6aa03d5ded604be58cd5ea00efdb0a6d.jpg'
-    const sentenceCase = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
-    // const  = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
-    // console.log(property)
-    const amenities = property.amenities
+  const [properties, setProperties] = useState([])
+  const { images, location, propertyId, isVacant, contact, mainlocation, subLocation = "N/A", distanceFromMainRoad = "N/A" } = property;
+  {/*console.log(property);*/ }
+  const image1 = images[0]
+  //const image2 = images[1]
+  // const dummyImage = 'https://picsum.photos/250/150'
+  // const dummyImage2 = '/images/sieuwert-otterloo-aren8nutd1Q-unsplash_6aa03d5ded604be58cd5ea00efdb0a6d.jpg'
+  const sentenceCase = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
+  // const  = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
+  // console.log(property)
+  const amenities = property.amenities
+  const [vacantUnitsCount, setVacantUnitsCount] = useState(0);
+  const handleChangeVacancyStatus = (e) => {
+    const { checked } = e.target;
+    const vacancyStatus = checked ? 'vacant' : 'occupied';
+    // Update vacancy status in the backend or state
+    console.log(`Property ${propertyId} is now ${vacancyStatus}`);
+  }
+
+  useEffect(() => {
+    const vacantUnits = properties.filter(property => property.status === 'vacant');
+    setVacantUnitsCount(vacantUnits.length);
+  }, [properties]);
+
 
   return (
     <div className='inner-card'>
       <div className='propert-image'>
         <img src={image1} alt={property.propertyTitle} />
       </div>
-      <p>
-        <i className="fa-solid fa-location-dot"></i> {property.propertyTitle} - {property.location}
-      </p>
-      <h3>{ sentenceCase }</h3>
-      <p className='price'>
-        <i className="fa-solid fa-hand-holding-dollar"></i> Ksh.{ property.price }
-      </p>
-      {/* <p className='btn vacant btn-warning text-center m-auto mb-2'>
-        Vacant
-      </p> */}
-      {/* <p> <strong>Call/Text 0712345678</strong></p>   */}
-      <div className='d-flex justify-content-center gap-3'>
-        
-        <Link 
-          to={`/viewhouses/${property.propertyId}`} 
-          className='btn btn-secondary'
-        >
-          More info
-        </Link>    
-        <Link 
-          to={`/viewhouses/${property}`} 
+      <div>
+        <h5>Apartment name:</h5>
+        <p>
+          <i className="fa-solid fa-location-dot"></i> {property.propertyTitle}
+        </p>
+      </div>
+
+      <div className="d-flex justify-content-center border p-2 mb-2">
+        <div>
+          <h5>Main location:</h5>
+          <p>{mainlocation}</p>
+        </div>
+        <div>
+          <h5>Sub location:</h5>
+          <p>{subLocation}</p>
+        </div>
+      </div>
+
+      <div>
+        <h5>Distance from Main road:</h5>
+        <p>{distanceFromMainRoad}  metres</p>
+      </div>
+
+      <div>
+        <h5>House Category:</h5>
+        <p>{property.houseCategory}</p>
+      </div>
+
+      <div className='price'>
+        <p>Price :</p>
+        <p>
+          <i className="fa-solid fa-hand-holding-dollar"></i> Ksh.{property.price}
+        </p>
+
+        {/*{isVacant ? (
+                <p className='btn vacant btn-warning text-center m-auto mb-2'>
+                    Vacant
+                </p>
+            ) : (
+                <p className='btn occupied btn-secondary text-center m-auto mb-2'>
+                    Occupied
+                </p>
+            )}
+       <p> <strong>Call/Text 0712345678</strong></p>  
+      <h5>Number of Vacant Units Available: {property.subLocation}</h5>  */}
+        {/* <h5 className='btn btn-secondary m-auto mb-4'>Contact :<br/> {property.contact}</h5>*/}
+
+        <div className='d-flex justify-content-center gap-3'>
+
+
+          <Link
+            to={`/viewhouses/${property.propertyId}`}
+            className='btn mb-2 btn-secondary'
+          >
+            More info
+          </Link>
+          {/*<Link
+          to={`/viewhouses/${property}`}
           className='btn btn-secondary'
         >
           Other units
-        </Link>         
+    </Link>}*/}
+        </div>
+        </div>
+        {/* <hr /> */}
       </div>
-      {/* <hr /> */}
-    </div>
-  )
+      )
 }
 
-export default PropertyCard
+      export default PropertyCard

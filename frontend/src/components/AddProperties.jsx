@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./AddProperties.scss";
-//import axios from "axios";
+import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+import './RegisterForm.css' 
+import axios from 'axios'
 
 const AddProperties = () => {
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
   const [propertyData, setPropertyData] = useState({
     propertyTitle: "",
     propertyType: "",
+    propertyCategory: "",
     mainLocation: "",
     subLocation: "",
     distanceFromMainRoad: "",
@@ -17,357 +18,153 @@ const AddProperties = () => {
     contact: "",
     profilePic: {
       picName: "",
-      picContent: "base64",
+      picContent: ""
     },
-    amenities: {
+    /*amenities: {
       water: { selected: false },
       garbageCollection: { selected: false, pricePerMonth: "" },
       electricity: { selected: false },
       cctv: { selected: false },
-      security: { selected: false },
-    },
-  });
+      security: { selected: false }
+    }*/
+  })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleInputChange = (e) => {
-    const { name, value, files, type, checked } = e.target;
+  const handleInputChange = (e) =>{
+    const { name, value, files } = e.target
 
-    if (name === "profilePic") {
+    if (name === 'profilePic') {
       const file = files[0];
-
+  
       const reader = new FileReader();
       reader.onload = (event) => {
         setPropertyData({
           ...propertyData,
           profilePic: {
             picName: file.name,
-            picContent: event.target.result.split(",")[1], // Extracting the base64 content
+            picContent: event.target.result.split(',')[1], // Extracting the base64 content
           },
         });
       };
-
+  
       if (file) {
         reader.readAsDataURL(file);
       }
-    } else if (type === "checkbox") {
-      // Handle checkbox input
+    
+    }
+    /*
+    else if (name in propertyData.amenities) {
       setPropertyData({
         ...propertyData,
         amenities: {
           ...propertyData.amenities,
-          [name]: {
-            selected: checked,
-            value: checked ? name : `no ${name}`,
-          },
+          [name]: value === 'Yes' ? true : false,
         },
       });
-    } else {
+    } */else {
       // Handle other input fields
       setPropertyData({
         ...propertyData,
         [name]: value,
       });
     }
-  };
+}
 
-  /*const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(propertyData);
-    const token = localStorage.getItem("sessionToken");
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    console.log(propertyData)
+    const token = localStorage.getItem("sessionToken")
     axios
-      .post("https://backend.kejaspace.com/profile/addproperty", propertyData, {
-        headers: {
-          authorization: token,
-        },
-      })
-      .then((response) => {
-        setSuccess("Property added successfully");
-        setError(null);
-        navigate("/profile");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Failed to add property. Please try again");
-      });
-  };*/
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("sessionToken");
-    try {
-      const response = await fetch(
-        "https://backend.kejaspace.com/profile/addproperty",
-        {
-          method: "POST",
-          headers: {
-            authorization: token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(propertyData),
+      .post('https://backend.kejaspace.com/profile/addproperty', propertyData, {
+        headers:{
+            'authorization': token
         }
-      );
-
-      // Reset form or perform any other actions after successful submission
-
-      console.log(propertyData);
-      setSuccess("Property added successfully");
-      setError(null);
-      // Navigate to a different page or perform any other action
-      navigate("/profile"); // Example navigation to a success page
-    } catch (error) {
-      console.log("Error submitting property data:", error);
-      setError("Failed to add property. Please try again");
-      // Handle error, show message, or retry submission
-    }
-  };
+        
+      })
+      .then(response =>{
+        setSuccess('Property added successfully')
+        setError(null)
+        navigate('/profile')
+      })
+      .catch(error =>{
+        console.error(error)
+        setError('Failed to add property. Please try again')
+        console.log('err',  response)
+      })
+  }
 
   return (
-    <div className="property-container">
+    <div className='main-wrapper'>
       <div>
         <h3>Add Property</h3>
       </div>
 
-      {error && (
-        <div className="alert alert-danger register-form">
-          <p className="danger">{error}</p>
-        </div>
-      )}
-      {success && (
-        <div className="alert alert-success register-form">
-          <p>{success}</p>
-        </div>
-      )}
+      {error && 
+            <div className="alert alert-danger register-form">
+                <p className='danger'>{error}</p>
+            </div>
+        }
+        {success &&
+            <div className="alert alert-success register-form">
+                <p>{success}</p>
+            </div>
+        }
 
       <div>
-        <form className="property-form" onSubmit={handleSubmit}>
-          <div className="div1">
-            <div className="div1-1">
-              <div className="inputContainer">
-                <label htmlFor="propertyTitle" className="label">
-                  Property Title
-                </label>
-                <input
-                  name="propertyTitle"
-                  value={propertyData.propertyTitle}
-                  onChange={handleInputChange}
-                  type="text"
-                  className="form-control"
-                  id="propertyTitle"
-                  aria-describedby="propertyTitle"
-                  required
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="propertyType" className="label">
-                  Property Type
-                </label>
-                :
-                <select
-                  name="propertyType"
-                  id="propertyType"
-                  value={propertyData.propertyType}
-                  onChange={handleInputChange}
-                  className="form-select form-select-sm"
-                  aria-label=".form-select-sm example"
-                  placeholder="Spacious House"
-                  required
-                >
-                  <option> </option>
-                  <option>Commercial</option>
-                  <option>Residential</option>
-                  <option>Both</option>
-                </select>
-              </div>
-            </div>
-            <div className="div1-2">
-              <div className="inputContainer">
-                <label htmlFor="mainLocation" className="label">
-                  Main Location
-                </label>
-                <input
-                  name="mainLocation"
-                  value={propertyData.mainLocation}
-                  onChange={handleInputChange}
-                  type="text"
-                  className="form-control"
-                  id="mainLocation"
-                  aria-describedby="mainLocation"
-                  required
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="subLocation" className="label">
-                  Sub Location
-                </label>
-                <input
-                  name="subLocation"
-                  value={propertyData.subLocation}
-                  onChange={handleInputChange}
-                  type="text"
-                  className="form-control"
-                  id="subLocation"
-                  aria-describedby="subLocation"
-                  required
-                />
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="distanceFromMainRoad" className="label">
-                  Distance From Main Road
-                </label>
-                <input
-                  name="distanceFromMainRoad"
-                  value={propertyData.distanceFromMainRoad}
-                  onChange={handleInputChange}
-                  type="text"
-                  className="form-control"
-                  id="distanceFromMainRoad"
-                  aria-describedby="distanceFromMainRoad"
-                  required
-                  placeholder="eg 10km from Kima Road"
-                />
-              </div>
-            </div>
+        <form className='register-form' onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="propertyTitle" className="form-label">Property Title</label>
+            <input name="propertyTitle" value={propertyData.propertyTitle} onChange={handleInputChange} type='text' className="form-control" id="propertyTitle" aria-describedby="propertyTitle"  required/>
           </div>
-          <div className="div2">
-            <div className="inputContainer">
-              <label htmlFor="description" className="label">
-                Description
-              </label>
-              <input
-                name="description"
-                value={propertyData.description}
-                onChange={handleInputChange}
-                type="text"
-                className="form-control"
-                id="description"
-                aria-describedby="description"
-                required
-              />
-            </div>
-            <div className="checkbox-wrapper">
-              <h4>Amenities</h4>
-              <div className="checkbox">
-                <input
-                  name="water"
-                  type="checkbox"
-                  checked={propertyData.amenities.water.selected}
-                  onChange={handleInputChange}
-                  className="form-check-input"
-                  id="water"
-                />
-                <label htmlFor="water">Water</label>
-              </div>
-
-              <div className="checkboxCont">
-                <div>
-                  <input
-                    name="garbageCollection"
-                    type="checkbox"
-                    checked={propertyData.amenities.garbageCollection.selected}
-                    onChange={handleInputChange}
-                    className="form-check-input"
-                    id="garbageCollection"
-                  />
-                  <label htmlFor="water">Garbage Collection</label>
-                </div>
-                <div className="price">
-                  <label htmlFor="pricePerMonth">Price Per Month</label>
-                  <span>
-                    <input
-                      name="pricePerMoth"
-                      value={
-                        propertyData.amenities.garbageCollection.pricePerUnit
-                      }
-                      onChange={handleInputChange}
-                      type="text"
-                      className="form-control"
-                      id="pricePerMonth"
-                      aria-describedby="pricePerMonth"
-                      placeholder="eg ksh 8000"
-                    />
-                  </span>
-                </div>
-              </div>
-
-              <div className="checkbox">
-                <input
-                  name="electricity"
-                  type="checkbox"
-                  checked={propertyData.amenities.electricity.selected}
-                  onChange={handleInputChange}
-                  className="form-check-input"
-                  id="electricity"
-                />
-                <label htmlFor="water">Electricity</label>
-              </div>
-
-              <div className="checkbox">
-                <input
-                  name="cctv"
-                  type="checkbox"
-                  checked={propertyData.amenities.cctv.selected}
-                  onChange={handleInputChange}
-                  className="form-check-input"
-                  id="cctv"
-                />
-                <label htmlFor="cctv">CCTV</label>
-              </div>
-
-              <div className="checkbox">
-                <input
-                  name="security"
-                  type="checkbox"
-                  checked={propertyData.amenities.security.selected}
-                  onChange={handleInputChange}
-                  className="form-check-input"
-                  id="security"
-                />
-                <label htmlFor="security">Security</label>
-              </div>
-            </div>
+          <div className="mb-3">
+            <label htmlFor="propertyType" className="form-label">Property Type</label>: 
+            <select name="propertyType" id="propertyType" value={propertyData.propertyType} onChange={handleInputChange} className='form-select form-select-sm' aria-label=".form-select-sm example" required>
+              <option> </option>
+              <option>Commercial</option>
+              <option>Residential</option>
+              <option >Both</option>
+            </select>
           </div>
-          <div className="div3">
-            <div className="inputContainer">
-              <label htmlFor="contact" className="label">
-                Contact
-              </label>
-              <input
-                name="contact"
-                value={propertyData.contact}
-                onChange={handleInputChange}
-                type="text"
-                className="form-control"
-                id="contact"
-                placeholder="Contact"
-                aria-describedby="contact"
-                required
-              />
-            </div>
-            <div className="inputCont">
-              <label htmlFor="profilePic" className="label">
-                Profile Picture
-              </label>
-              <input
-                name="profilePic"
-                onChange={handleInputChange}
-                type="file"
-                className="form-control"
-                id="profilePic"
-                aria-describedby="profilePic"
-                placeholder="Picture"
-                required
-              />
-            </div>
+          
+          <div className="mb-3">
+            <label htmlFor="mainLocation" className="form-label">Main Location</label>
+            <input name="mainLocation" value={propertyData.mainLocation} onChange={handleInputChange} type='text' className="form-control" id="mainLocation" aria-describedby="mainLocation" required />
           </div>
+          <div className="mb-3">
+            <label htmlFor="subLocation" className="form-label">Sub Location</label>
+            <input name="subLocation" value={propertyData.subLocation} onChange={handleInputChange} type='text' className="form-control" id="subLocation" aria-describedby="subLocation" required/>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="distanceFromMainRoad" className="form-label">Distance from Main Road</label>
+            <input name="distanceFromMainRoad" value={propertyData.distanceFromMainRoad} onChange={handleInputChange} type='text' className="form-control" id="distanceFromMainRoad" aria-describedby="distanceFromMainRoad" required/>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="contact" className="form-label">Contact</label>
+            <input name="contact" value={propertyData.contact} onChange={handleInputChange} type='text' className="form-control" id="contact" aria-describedby="contact" required />
+          </div>
+          
+          <div className="mb-3">
+            <label htmlFor="profilePic" className="form-label">Profile Picture</label>
+            <input name='profilePic'   onChange={handleInputChange} type="file" className="form-control" id="profilePic" aria-describedby="profilePic" required />
+          </div>
+          
+         
 
-          <button type="submit" className="btn">
-            Submit
-          </button>
+
+        
+          <div className='d-flex'>
+          <button type="submit" className=" button btn btn-primary">Submit</button>
+          <button type="button" className="button btn btn-secondary" onClick={() => navigate('/profile')}>Back</button>
+
+          </div>
+          
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddProperties;
+export default AddProperties
+

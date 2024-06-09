@@ -17,6 +17,20 @@
     /* background: blue; */
     margin:0 5%;
 }
+.search-bar{
+    position: absolute;
+    bottom: 170px;
+    
+    
+    
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    margin: auto;
+    border: none;
+    justify-self: center;
+}
+
 
 .inner-card{
     width: 28%;
@@ -52,6 +66,14 @@
 
 .button{
     width: fit-content;
+}
+.carousel {
+    width: 100%;
+    height: 50%
+}
+.searchform {
+    display: flex;
+    
 }
 
 .vacant{
@@ -121,21 +143,32 @@
         object-fit: contain;
         box-shadow: .0125em .0125em .25em grey;
     }
+    .carousel {
+        width: 100%;
+        height: 50%
+    }
+    .search-bar{
+        position: absolute;
+        bottom: 100px;
+        width: 50%;
+        
+        display: flex;
+       
+        border: none;
+        justify-self: center;
+    }
+    .searchform {
+        display: block;
+        
+    }
 }
 
 .carousel{
     justify-content: center;
     /* background-color: blue; */
+    
 }
 
-.search-bar{
-    position: absolute;
-    bottom: 60px;
-    background-color: rgba(255, 255, 255, 0.482);
-    width: 80%;
-    padding: 20px;
-    display: flex;
-}
 
 .tag{
     /* background-color: grey; */
@@ -154,7 +187,7 @@
 
 .img-carousel img{
     width: 100%;
-    height: inherit;
+    height: 50%;
     border-radius: 5px;
 }
 
@@ -168,31 +201,3 @@
     }
 }
 
-@media screen and (max-width: 550px) {
-    .d-flex{
-        flex-direction: column;
-        margin-bottom: 10px;
-    }
-    .tag{
-        width: 100%;
-        height: 30vh;
-        margin-bottom: 45vh;
-    }
-    .img-carousel{
-        width: 100%;
-        height: 30vh;
-    }
-    
-    .img-carousel img{
-        width: 100%;
-        height: inherit;
-    }
-    .search-bar{
-        position: absolute;
-        top: 30vh;
-        margin: auto;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-}

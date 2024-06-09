@@ -42,7 +42,7 @@ const DeleteProperty = () => {
             if(success){
                 timer = setTimeout(()=>{
                     navigate('/profile')
-                }, 5000)
+                }, 500)
             }
             return () => clearTimeout(timer)
     }, [success, navigate])

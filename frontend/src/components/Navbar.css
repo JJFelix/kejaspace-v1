@@ -1,0 +1,165 @@
+.name-tag{
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    padding: 15px 10px;
+    color: white;
+    width: 100%;
+}
+
+.nav {
+    text-align: center;
+    margin: auto;
+   
+}
+.nav-ul{
+    list-style: none;
+    display: flex;
+    overflow: hidden;
+    gap: 55px;
+}
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+
+
+}
+.logs{
+    display: flex;
+    gap: 8px;
+
+}
+.nav-link:hover{
+    color: grey;
+}
+
+.text-white{
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.nav-header {
+    font-size: 40px;
+    margin-left: 10px;
+
+}
+.auths {
+    
+}
+.profile-image{
+    width: 60px;
+    height: 58px;
+    border-radius: 2.5px;
+}
+.container{
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* .user-actions {
+    margin-left: auto; 
+    background-color: aqua;
+} */
+
+/* .user-actions a {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+    font-size: small;
+} */
+
+@media screen and (max-width: 900px) {
+    .container{
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .text-white{
+        flex-direction: row;
+        align-items: center;
+    }
+   
+    .nav-ul{
+        list-style: none;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        gap: 3px;
+        font-size: 10px;
+       
+    }
+    .nav-link {
+        font-size: 8px;
+    }
+    .log-Button {
+        padding: 4px;
+        font-size: 5px;
+        margin: auto;
+        margin-top: 10px ;
+
+    }
+
+    .profile-image{
+        width: 30px;
+        height: 28px;
+        border-radius: 1px;
+    }
+    .nav-header {
+        font-size: 10px;
+        margin-left: 5px;
+    
+    }
+    .log-Button {
+
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .nav-link {
+        font-size: 8px;
+    }
+    .nav-ul{
+        list-style: none;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        gap: 2px;
+
+       
+    }
+    .log-btn {
+        padding: 4px;
+        font-size: 5px;
+    }
+    .name-tag{
+        padding: 10px 5px;
+        width: 100%;
+    }
+    .logs{
+        display: flex;
+    }
+    .nav-header {
+        font-size: 10px;
+       
+    
+    }
+    .profile-image{
+        width: 27px;
+        height: 30px;
+        border-radius: 1px;
+    }
+    .log-Button {
+        padding: 2px;
+        font-size: 10px;
+        align-items: center;
+    }
+
+}

@@ -1,143 +1,179 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { MdEmail } from "react-icons/md";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-import "./Profile.scss";
-//import '../components/FeaturedProperties.css'
-import axios from "axios";
-import { fadeIn, staggerContainer } from "../utils/motion";
+import './Profile.css';
+import '../components/FeaturedProperties.css';
+import UploadRequisitionForm from '../admin/UploadRequisitionForm';
 
 const Profile = () => {
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [userDetails, setUserDetails] = useState({});
-  // const userName = localStorage.getItem('userName')
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  const [newUserId, setNewUserId] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [newUserRole, setNewUserRole] = useState('propertyManager');
+  const [responseMessage, setResponseMessage] = useState('');
 
   useEffect(() => {
     localStorage.removeItem("propertyId");
     localStorage.removeItem("selectedHouse");
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("sessionToken");
-    axios
-      .get(`https://backend.kejaspace.com/profile/${userId}`, {
-        headers: {
-          authorization: token,
-        },
-      })
-      .then((response) => {
-        // console.log(response);
-        const userDetails = response.data.userDetails;
-        setUserDetails(userDetails);
-        const propertyDetails = response.data.propertyDetails;
-        setPropertyDetails(propertyDetails);
-        console.log("My properties", propertyDetails);
-        // setPropOwner(propertyDetails[0].userId)
-        // console.log('User details', userDetails);
-      })
-      .catch((error) => {
-        console.log(error);
+    
+    if (!token) {
+      setError('No authorization token found. Please log in again.');
+      setLoading(false);
+      return;
+    }
+    console.log('UserId', userId)
+
+    axios.get(`https://backend.kejaspace.com/profile/${userId}`, {
+      headers: { 'authorization': token }
+    })
+    .then(response => {
+      const userDetails = response.data.userDetails || {};
+      setUserDetails(userDetails);
+      console.log('userDetails', userDetails)
+      const propertyDetails = response.data.propertyDetails || [];
+      setPropertyDetails(propertyDetails);
+      setError(null);
+      setLoading(false);
+    })
+    .catch(error => {
+      console.error('Error fetching profile data:', error);
+      if (error.response) {
+        setError(`Error: ${error.response.data.error || error.response.statusText}`);
+      } else if (error.request) {
+        setError('No response received from server.');
+      } else {
+        setError('An unexpected error occurred.');
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  const handleGrantRights = async (e) => {
+    e.preventDefault();
+
+    const url = newUserRole === 'propertyManager' ? 
+      'https://backend.kejaspace.com/propertyManager' : 
+      'https://backend.kejaspace.com/registerAgent';
+
+    const payload = { userId: newUserId, email: newUserEmail };
+
+    try {
+      const response = await axios.post(url, payload, {
+        headers: { 'authorization': localStorage.getItem("sessionToken") }
       });
-  }, []);
 
-  const [scrolled, setScrolled] = useState(false);
+      if (response.status === 200) {
+        setResponseMessage('Success: The operation was completed successfully.');
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        setResponseMessage('Error: Logged in user is not a superAdmin.');
+      } else if (error.response.status === 400) {
+        setResponseMessage('Error: The email submitted is not registered as a KejaSpace user.');
+      } else {
+        setResponseMessage(`Unexpected error: ${error.response.status}`);
+      }
+    }
+  };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
-    };
+  const dummyImage = '/images/download.png';
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const dummyImage =
-    "/images/ralph-ravi-kayden-mR1CIDduGLc-unsplash_d06c8bcd5110495c926a7afca70ae57e.jpg";
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
-        className="wrapper-container"
-      >
-        <h1>My Profile</h1>
-        <div className="container">
-          <motion.div
-            className={`user-info ${scrolled ? "scrolled" : ""} ${
-              scrolled ? "shadow-bounce" : ""
-            }`}
-            initial={{ backgroundColor: "transparent", top: "7rem" }}
-            animate={{
-              backgroundColor: scrolled ? "#04064d" : "transparent",
-              top: scrolled ? "4rem" : "7rem",
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="left">
-              <div className="property-image">
-                <img src={propertyDetails[0]?.profilePic} alt="none" />
-              </div>
-              <div className="user-details">
-                <h4>
-                  {userDetails.firstName} {userDetails.lastName}
-                </h4>
-                <h6>
-                  <MdEmail /> {userDetails.email}
-                </h6>
+      <div className='main-wrapper'>
+        <h1>Profile</h1>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <div className='m-3'>
+          <h3 className='m-10'>Advertise with us</h3>
+          <p>
+            <h5>If you are a home owner and you would like to advertise your properties with us.<br/> 
+            Fill in this form.</h5>
+          </p>
+        </div>
+        <div className='user-info'>
+          <div className='property-image'>
+            <img src={propertyDetails[0]?.profilePic || dummyImage} alt="none" />
+          </div><br/>
+          <div className='user-details'>
+            <h4>{userDetails.firstName}</h4>
+            <br/>
+            <p>{userDetails.email}</p>
+          </div>
+          {userDetails.privilage === 'agent' || userDetails.privilage === 'admin' || userDetails.privilage === 'manager' ? (
+            <div className='d-flex gap-3'>
+              <Link to={'/addproperty'} className='btn btn-primary'>Add Property</Link>
+              <Link to={'/requisitions'} className='btn btn-primary'>Requisition Forms</Link>
+            </div>
+          ) : (
+            <Link to={'/UploadRequisitionForm'} className='btn btn-primary '>Requisition form</Link>
+          )}
+        </div>
+
+        <div className='property-main-card'>
+          {propertyDetails.map((property) => (
+            <div className="property-inner-card" key={property.propertyId}>
+              <img src={property.profilePic} className='property-inner-image' alt={property.propertyTitle} />
+              <p>{property.propertyTitle}</p>
+              <p>{property.propertyDetails}</p>
+              <div className='buttons d-flex justify-content-center gap-4'>
+                <Link to={`/viewproperty/${property.propertyId}`} className='btn btn-secondary'>
+                  <span className='text-decoration-none'>
+                    <small>View </small><i className="fa-solid fa-eye"></i>
+                  </span>
+                </Link>
+                <Link 
+                  to={{
+                    pathname: `/profile/deleteproperty/${property.propertyId}`,
+                  }}
+                  className='btn btn-danger'>
+                  <span>
+                    <small>Delete </small><i className="fa fa-trash" aria-hidden="true"></i>
+                  </span>
+                </Link>
               </div>
             </div>
-            <hr />
-            <Link to="/addproperty" className="btn-primary">
-              Add Property
-            </Link>
-          </motion.div>
-          {/* <Link to={'/addproperty'} className='btn btn-primary'>
-          Add Property
-        </Link> */}
-
-          <div className="propertyCard">
-            {/* <motion.h2 variants={fadeIn("right", "tween", 0.5, 1)}>
-              My Properties
-      </motion.h2>*/}
-            {propertyDetails.map((property) => (
-              <div className="propertyInnerCard" key={property.propertyId}>
-                <img src={property.profilePic} alt={property.propertyTitle} />
-                <p>{property.propertyTitle}</p>
-                <div className="buttons d-flex justify-content-center gap-4">
-                  <Link
-                    to={{
-                      pathname: `/viewproperty/${property.propertyId}`,
-                    }}
-                    className="btn btn-secondary"
-                  >
-                    <span className="text-decoration-none">
-                      <small>View </small>
-                      <i className="fa-solid fa-eye"></i>
-                    </span>
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/profile/deleteproperty/${property.propertyId}`,
-                    }}
-                    className="btn btn-danger"
-                  >
-                    <span>
-                      <small>Delete </small>
-                      <i className="fa fa-trash" aria-hidden="true"></i>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
-      </motion.div>
+
+        {userDetails.privilage === 'admin' || userDetails.privilage === 'agent' && (
+          <div className='grant-rights-section'>
+            <h2 className='mt-3'><u>Grant Rights to Users</u></h2>
+            <form onSubmit={handleGrantRights}>
+              <label className='m-3'>
+                User ID:
+                <input className='m-1' type="text" value={newUserId} onChange={(e) => setNewUserId(e.target.value)} />
+              </label>
+              <br />
+              <label className='m-3'>
+                Email:
+                <input className='m-1' type="email" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
+              </label>
+              <br />
+              <label className='mb-2'>
+                Role:
+                <select className='m-1 p-2' value={newUserRole} onChange={(e) => setNewUserRole(e.target.value)}>
+                  <option value="propertyManager">Property Manager</option>
+                  <option value="agent">Agent</option>
+                </select>
+              </label>
+              <br />
+              <button type="submit">Grant Rights</button>
+            </form>
+            {responseMessage && <p>{responseMessage}</p>}
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-//import "./RegisterForm.scss";
-import "./LoginForm.scss";
-import axios from "axios";
-
-import { MdEmail } from "react-icons/md";
-import { FaLock } from "react-icons/fa";
-import { AiOutlineUser } from "react-icons/ai";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './RegisterForm.css';
+import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 export const setLocalStorageData = (key, value) => {
-  const expirationTime = Date.now() + 60 * 60 * 1000; // 30 minutes in milliseconds
-  localStorage.setItem(key + "_ts", expirationTime); // Store expiration timestamp
+  const expirationTime = Date.now() + 60 * 60 * 1000; // 1 hour in milliseconds
+  localStorage.setItem(key + '_ts', expirationTime); // Store expiration timestamp
   localStorage.setItem(key, value);
 };
 
 const LoginForm = () => {
   const [userData, setUserData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [sessionToken, setSessionToken] = useState("");
-  const [userId, setUserId] = useState(null);
 
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -38,27 +32,22 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://backend.kejaspace.com/login", userData)
+      .post('https://backend.kejaspace.com/login', userData)
       .then((response) => {
-        // console.log(response)
-        setSuccess("Login Successful");
+        setSuccess('Login Successful');
         setError(null);
         const token = response.data.session_token;
         const id = response.data.userId;
-        let userName;
+        const userRole = response.data.role; // Assuming the response includes user role
 
-        setSessionToken(token);
-        setUserId(id);
+        localStorage.setItem('sessionToken', token);
+        localStorage.setItem('userId', id);
+        setLocalStorageData('userName', userData.email);
 
-        localStorage.setItem("sessionToken", token);
-        localStorage.setItem("userId", id);
-        // localStorage.setItem('userName', userData.email)
-        setLocalStorageData("userName", userData.email);
-        console.log(
-          `Session token: ${token}, userId: ${id}, userName: ${userName}`
-        );
+        // Use login method from AuthContext
+        login({ email: userData.email, role: userRole });
 
-        navigate("/");
+        navigate('/');
         window.location.reload(true);
       })
       .catch((error) => {
@@ -68,80 +57,61 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="container">
-        <div className="text">
-          <h6>Welcome To Keja Space</h6>
-          <AiOutlineUser className="icon" />
-          <h5>
-            <strong>Login</strong>
-          </h5>
-        </div>
-        {error && (
-          <div className="alert alert-danger register-form">
-            <p className="danger">Error: {error}</p>
-          </div>
-        )}
-        {success && (
-          <div className="alert alert-success register-form">
-            <p>{success}</p>
-          </div>
-        )}
-        <form className="register-form" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <span className="icon">
-              <MdEmail />
-            </span>
-
-            <input
-              name="email"
-              value={userData.email}
-              onChange={handleInputChange}
-              type="text"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              required
-            />
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email
-            </label>
-          </div>
-          <div className="input-wrapper">
-            <span className="icon">
-              <FaLock />
-            </span>
-
-            <input
-              name="password"
-              value={userData.password}
-              onChange={handleInputChange}
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              required
-            />
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-          </div>
-          <button type="submit" className="btn btn-primary button">
-            Login
-          </button>
-        </form>
-        {/* <div>
-            <p>Log in with <a className='text-decoration-none' href="#google-auth">Google</a></p>
-        </div> */}
-        <div>
-          <p>
-            Not registered? Sign up{" "}
-            <a className="text-decoration-none" href="/register">
-              here
-            </a>
-          </p>
-        </div>
+    <>
+      <div>
+        <h3>Login</h3>
       </div>
-    </div>
+      {error && (
+        <div className="alert alert-danger register-form">
+          <p className="danger">Error: {error}</p>
+        </div>
+      )}
+      {success && (
+        <div className="alert alert-success register-form">
+          <p>{success}</p>
+        </div>
+      )}
+      <form className="register-form" onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
+            Email
+          </label>
+          <input
+            name="email"
+            value={userData.email}
+            onChange={handleInputChange}
+            type="text"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
+            Password
+          </label>
+          <input
+            name="password"
+            value={userData.password}
+            onChange={handleInputChange}
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <button type="submit" className="btn btn-primary button">
+          Login
+        </button>
+      </form>
+      <div>
+        <p>
+          Not registered? Sign up{' '}
+          <a className="text-decoration-none" href="/register">
+            here
+          </a>
+        </p>
+      </div>
+    </>
   );
 };
 

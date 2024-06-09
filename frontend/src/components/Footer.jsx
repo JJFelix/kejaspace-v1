@@ -1,109 +1,32 @@
-import React from "react";
-import "./Footer.scss";
-import "../assets/react.svg";
-import { Link } from "react-router-dom";
+import React from 'react';
+import './Footer.css'
+import '../assets/react.svg'
+import { Link } from 'react-router-dom';
 function Footer() {
-  //const profileImage = "/images/profile.jpeg";
-  return (
-    <footer>
-      <div className="footer-content">
-        <div className="top">
-          <div className="footerLogo">
-            <img src="/image.png" alt="Logo" />
-            <h1>kejaSpace</h1>
-          </div>
-
-          <div className="footer-social">
-            <Link to={"https://facebook.com/KejaSpace"}>
-              <i className="fab fa-facebook"></i>
-            </Link>
-            <Link to={"https://twitter.com/KejaSpace"}>
-              <i className="fab fa-twitter"></i>
-            </Link>
-            <Link to={"https://instagram.com/KejaSpace"}>
-              <i className="fab fa-instagram"></i>
-            </Link>
-          </div>
-        </div>
-        <div className="bottom">
-          <div className="div">
-            <h4>About</h4>
-            <nav>
-              <Link to={"/home"} className={"nav-link"}>
-                Home
-              </Link>
-
-              <Link to={"/about"} className={"nav-link"}>
-                About
-              </Link>
-
-              <Link to={"/contact"} className={"nav-link"}>
-                Contact
-              </Link>
-
-              <Link to={"/policy"} className={"nav-link"}>
-                Policy
-              </Link>
-            </nav>
-          </div>
-
-          <div className="div">
-            <h4>Blogs</h4>
-            <nav>
-              <Link to={"/about"} className={"nav-link"}>
-                About
-              </Link>
-
-              <Link to={"/contact"} className={"nav-link"}>
-                Contact
-              </Link>
-
-              <Link to={"/policy"} className={"nav-link"}>
-                Policy
-              </Link>
-            </nav>
-          </div>
-
-          <div className="div">
-            <h4>Contact</h4>
-            <nav>
-              <Link to={"/about"} className={"nav-link"}>
-                About
-              </Link>
-
-              <Link to={"/contact"} className={"nav-link"}>
-                Contact
-              </Link>
-
-              <Link to={"/policy"} className={"nav-link"}>
-                Policy
-              </Link>
-            </nav>
-          </div>
-          <div className="div">
-            <h4>Policy</h4>
-            <nav>
-              <Link to={"/about"} className={"nav-link"}>
-                Privacy
-              </Link>
-
-              <Link to={"/contact"} className={"nav-link"}>
-                Terms & Conditions
-              </Link>
-
-              <Link to={"/policy"} className={"nav-link"}>
-                Policy
-              </Link>
-            </nav>
-          </div>
-        </div>
-
-        <div className="maq">
-          <marquee>&copy; Keja Space</marquee>
-        </div>
-      </div>
-    </footer>
-  );
+    const profileImage = '/images/profile.jpeg'
+    return (
+        <footer>
+            <div className="footer-content">
+                <div className="footer-logo d-flex align-items-center">
+                    <img src={profileImage} alt="Logo" />
+                    <h5>Keja Space</h5>
+                </div>
+                <div className="footer-links">
+                    <ul>
+                        <li><Link to={'/about'} className={'nav-link'}>About</Link></li>
+                        <li><Link to={'/contact'} className={'nav-link'}>Contact Us</Link></li>
+                        <li><Link to={'/policy'} className={'nav-link'}>Our Policy</Link></li>
+                    </ul>
+                </div>
+                <div className="footer-social">
+                    <Link to={'https://www.facebook.com/profile.php?id=61560936770337&mibextid=ZbWKwL'}><i className="fab fa-facebook"></i></Link>
+                    <Link to={'https://twitter.com/KejaSpace'}><i className="fab fa-twitter"></i></Link>
+                    <Link to={'https://instagram.com/KejaSpace'}><i className="fab fa-instagram"></i></Link>
+                    <Link to={'https://www.tiktok.com/@kejaspacekenya?_t=8myfS3BaytJ&_r=1'}><i className="fab fa-tiktok"></i></Link>
+                </div>
+            </div>
+        </footer>
+    );
 }
 
 export default Footer;

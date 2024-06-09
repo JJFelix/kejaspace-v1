@@ -43,7 +43,7 @@ const DeleteHouse = () => {
             if(success){
                 timer = setTimeout(()=>{
                     navigate(`/viewproperty/${propertyId}`)
-                }, 5000)
+                }, 500)
             }
             return () => clearTimeout(timer)
     }, [success, navigate])
