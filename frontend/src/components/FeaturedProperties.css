@@ -1,0 +1,203 @@
+.main-card{
+    /* background-color: lightcoral; */
+    padding: 1px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.houses{
+    display: flex;
+    flex-wrap: wrap;
+    gap:30px;
+    justify-content: center;
+    /* background: blue; */
+    margin:0 5%;
+}
+.search-bar{
+    position: absolute;
+    bottom: 170px;
+    
+    
+    
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    margin: auto;
+    border: none;
+    justify-self: center;
+}
+
+
+.inner-card{
+    width: 28%;
+    /* background-color: rgb(176, 134, 134); */
+    border-radius: 5px;
+    box-shadow: 0 0 .125em grey;
+    padding: 1px;
+    display: flex ;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 50px;
+    height: fit-content;
+    /* text-align: start; */
+}
+
+.inner-card p{
+    text-align: center;
+    margin-left: 10px;
+}
+
+.propert-image{
+    width: 100%;
+    height: 35vh;
+    margin-bottom: 10px;
+}
+
+.propert-image img{
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5px;
+    height: inherit;
+}
+
+.button{
+    width: fit-content;
+}
+.carousel {
+    width: 100%;
+    height: 50%
+}
+.searchform {
+    display: flex;
+    
+}
+
+.vacant{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    border-radius: 5px;
+    /* background-color: rgb(182, 192, 182); */
+}
+
+.vacant:hover{
+    background-color: transparent;
+}
+
+.modal-title{
+    text-align: center;
+}
+
+/* .modal-body{
+    background-color: lightgray;
+} */
+
+/* .modal-body p{
+    box-shadow: .0125em .0125em .25em grey;
+    border-radius: 3px;
+    padding: 5px;
+} */
+
+.modal-img-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* background-color: red; */
+}
+
+.modal-img-container img{
+    width: 100%;
+    height: 50vh;
+    border-radius: 5px;
+    object-fit: contain;
+    /* border: solid 1px black; */
+    /* box-shadow: .0125em .0125em .25em grey; */
+}
+
+@media screen and (max-width: 778px){
+    .main-card{
+        display: flex;
+        /* flex-direction: column; */
+        /* flex-wrap: nowrap; */
+        justify-content: center;
+        overflow-x: scroll;
+        padding: 5px;
+    }
+
+    .houses{
+        margin: 0;
+    }
+    .inner-card{
+        /* width: 350px; */
+        width: 100%;
+    }    
+    .inner-card h4{
+        font-size: medium;
+    }
+    .modal-img-container img{
+        /* background-color: red; */
+        object-fit: contain;
+        box-shadow: .0125em .0125em .25em grey;
+    }
+    .carousel {
+        width: 100%;
+        height: 50%
+    }
+    .search-bar{
+        position: absolute;
+        bottom: 100px;
+        width: 50%;
+        
+        display: flex;
+       
+        border: none;
+        justify-self: center;
+    }
+    .searchform {
+        display: block;
+        
+    }
+}
+
+.carousel{
+    justify-content: center;
+    /* background-color: blue; */
+    
+}
+
+
+.tag{
+    /* background-color: grey; */
+    /* padding: 10px; */
+    height: 90vh;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+
+.img-carousel{
+    width: 100%;
+    height: 90vh;
+}
+
+.img-carousel img{
+    width: 100%;
+    height: 50%;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .tag{
+        height: 65vh;
+    }
+    .img-carousel{
+        height: 65vh;
+    }
+}
+

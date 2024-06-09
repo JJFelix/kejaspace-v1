@@ -1,0 +1,112 @@
+.house-card{
+    /* background-color: lightgray; */
+    margin: auto;
+    margin-top: 1em;
+    /* box-shadow: 0 0 0.125em #aba3a3; */
+    /* border-radius: 9px; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* padding: 10px; */
+    gap: 10px;
+    width: 75%;
+    /* min-height: 45.7vh; */
+}
+
+.house{
+    /* background-color: aqua; */
+    box-shadow: 0 0 0.125em #aba3a3;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.img-container{
+    display: flex;
+    /* flex-direction: column; */
+    gap: 2.5%;
+    justify-content: center;
+    /* background-color: red; */
+    padding: 5px;
+    overflow-x: scroll;
+    height: 60vh;
+    width: 100%; 
+}
+
+.house-image{
+    /* box-shadow:  0 0 0.125em #aba3a3;
+    padding: 2px; */
+    width: 40%;
+    height: 100%;
+    border-radius: 3px;
+}
+
+/* .img-container img{
+    width: 30%;
+    height: 100%;
+    border-radius: 9px;
+} */
+
+@media screen and (max-width: 778px) {
+    .house-card{
+        width: 100%;
+    }   
+    
+    .img-container{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    .house-image{
+        width: 100%;
+    }
+
+    .bt{
+        display: flex;
+        flex-direction: row;
+    }
+    .main-wrapper {
+        width: 100%
+    }
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    position: relative;
+  
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 50%;
+    max-height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Close button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  /* Image in modal */
+ 
