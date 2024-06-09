@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { url1, url2 } from "../App.jsx";
 
 import Carousel from "react-bootstrap/Carousel";
+import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
 const FeaturedProperties = () => {
@@ -39,7 +40,7 @@ const FeaturedProperties = () => {
       .then((response) => {
         setProperties(response.data);
         {
-          /*console.log('properties', properties);*/
+          // console.log('properties', properties);
         }
         setSearchedProperties(response.data);
         extractCategories(response.data);
@@ -50,10 +51,10 @@ const FeaturedProperties = () => {
   }, []);
 
   {
-    /*useEffect(() => {
-        setSearchedProperties(properties)
-        console.log('searchedProperties 2', searchedProperties)
-    }, [properties]) */
+    useEffect(() => {
+      setSearchedProperties(properties);
+      console.log("searchedProperties 2", searchedProperties);
+    }, [properties]);
   }
 
   const extractCategories = (properties) => {
@@ -145,28 +146,29 @@ const FeaturedProperties = () => {
     } */
   }
 
+  // console.log(properties);
+
   return (
     <>
-      <div className="carousel2 d-flex">
-        <Carousel className="tag">
-          {properties.map((property, index) =>
-            property.images.length > 0
-              ? property.images.map((image, imgIndex) => (
-                  <Carousel.Item
-                    key={`${index}-${imgIndex}`}
-                    className="img-carousel"
-                  >
-                    <Link to={`/viewhouses/${property.propertyId}`}>
-                      <img
-                        src={image}
-                        alt={property.propertyTitle}
-                        style={{ cursor: "pointer", height: "80%" }}
-                      />
-                    </Link>
-                  </Carousel.Item>
-                ))
-              : null
-          )}
+      <div>
+        <Carousel className="carousel2" fade>
+          {properties.map((property, index) => (
+            // property.images.length > 0
+            // ? property.images.map((image, imgIndex) => (
+            <Carousel.Item
+              // key={`${index}-${imgIndex}`}
+              className="img-carousel"
+            >
+              <Link to={`/viewhouses/${property.propertyId}`}>
+                <img
+                  src={property.images[0]}
+                  alt={property.propertyTitle}
+                  style={{ cursor: "pointer", height: "80%" }}
+                />
+              </Link>
+            </Carousel.Item>
+            // )) : null
+          ))}
         </Carousel>
       </div>
 
@@ -176,7 +178,7 @@ const FeaturedProperties = () => {
             className=" align-items-center   gap-3 searchform"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="houseType">Type: </label>
+            {/* <label htmlFor="houseType">Type: </label> */}
             <select
               name="houseType"
               id="houseType"
@@ -191,7 +193,7 @@ const FeaturedProperties = () => {
               <option value="commercial">Commercial</option>
               <option value="residential">Residential</option>
             </select>
-            <label htmlFor="houseCategory">Category: </label>
+            {/* <label htmlFor="houseCategory">Category: </label> */}
             <select
               name="houseCategory"
               id="houseCategory"
@@ -210,7 +212,7 @@ const FeaturedProperties = () => {
               ))}
             </select>
             <label htmlFor="min_price" className="m-1">
-              Min Price:
+              Min Price
             </label>
             <input
               type="number"
@@ -221,7 +223,7 @@ const FeaturedProperties = () => {
               onChange={handleChange}
               placeholder="Min Price"
             />
-            <label htmlFor="max_price">Max Price: </label>
+            <label htmlFor="max_price">Max Price</label>
             <input
               type="number"
               name="max_price"
@@ -239,13 +241,13 @@ const FeaturedProperties = () => {
               onChange={handleChange}
               placeholder="Location"
             />
-            <button type="submit" className="btn btn-primary m-5">
+            <button type="submit" className="btn btn-success m-5">
               Search
             </button>
           </form>
         </div>
 
-        <h1>Popular real estate units</h1>
+        <h1>Featured Units</h1>
         <div className="houses">
           {/* {searchedProperties.length === 0 && properties.length === 0 ? (
                     <p>Loading...</p>
