@@ -1,0 +1,36 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# ignore .docx
+*.docx
+
+# Ignore build artifacts
+build/
+dist/
+*.exe
+*.msi
+
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+venv
+.flaskenv
+# Ignore IDE files
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+requirement.txt
+
+/server/app/houseImages
