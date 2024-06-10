@@ -12,7 +12,7 @@ const Home = () =>{
             {/* Carousel */}
             <MainCarousel />
             <br />
-            <h2>Listed properties</h2>
+            <h2>LISTED PROPERTIES</h2>
             <FeaturedProperties />           
         </div>   
     )

@@ -156,7 +156,7 @@ const FeaturedProperties = () => {
             // property.images.length > 0
             // ? property.images.map((image, imgIndex) => (
             <Carousel.Item
-              // key={`${index}-${imgIndex}`}
+              key={index}
               className="img-carousel"
             >
               <Link to={`/viewhouses/${property.propertyId}`}>
@@ -170,6 +170,7 @@ const FeaturedProperties = () => {
             // )) : null
           ))}
         </Carousel>
+        <h2 className="search-tag">SEARCH YOUR PREFERRED PROPERTIES</h2>
       </div>
 
       <div className="main-card">
@@ -247,7 +248,7 @@ const FeaturedProperties = () => {
           </form>
         </div>
 
-        <h1>Featured Units</h1>
+        <h1>FEATURED UNITS</h1>
         <div className="houses">
           {/* {searchedProperties.length === 0 && properties.length === 0 ? (
                     <p>Loading...</p>

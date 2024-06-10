@@ -35,40 +35,17 @@ const PropertyCard = ({ property, onClick }) => {
       <div className='propert-image'>
         <img src={image1} alt={property.propertyTitle} />
       </div>
-      <div>
-        <h5>Apartment name:</h5>
-        <p>
-          <i className="fa-solid fa-location-dot"></i> {property.propertyTitle}
-        </p>
-      </div>
-
-      <div className="d-flex justify-content-center border p-2 mb-2">
-        <div>
-          <h5>Main location:</h5>
-          <p>{mainlocation}</p>
-        </div>
-        <div>
-          <h5>Sub location:</h5>
-          <p>{subLocation}</p>
-        </div>
-      </div>
 
       <div>
-        <h5>Distance from Main road:</h5>
-        <p>{distanceFromMainRoad}  metres</p>
+        <h4>{property.propertyTitle}</h4>   
+        <hr />
+        <p><i class="fa fa-home" aria-hidden="true"></i> {property.houseCategory}</p>    
+        <p><i className="fa-solid fa-location-dot"></i> {mainlocation}, {subLocation}</p>
+        <p><i class="fa fa-road" aria-hidden="true"></i> {distanceFromMainRoad}  metres from Main road</p>
+        <p><i className="fa-solid fa-hand-holding-dollar"></i> Ksh.{property.price}</p>
       </div>
-
-      <div>
-        <h5>House Category:</h5>
-        <p>{property.houseCategory}</p>
-      </div>
-
+      
       <div className='price'>
-        <p>Price :</p>
-        <p>
-          <i className="fa-solid fa-hand-holding-dollar"></i> Ksh.{property.price}
-        </p>
-
         {/*{isVacant ? (
                 <p className='btn vacant btn-warning text-center m-auto mb-2'>
                     Vacant
@@ -83,8 +60,6 @@ const PropertyCard = ({ property, onClick }) => {
         {/* <h5 className='btn btn-secondary m-auto mb-4'>Contact :<br/> {property.contact}</h5>*/}
 
         <div className='d-flex justify-content-center gap-3'>
-
-
           <Link
             to={`/viewhouses/${property.propertyId}`}
             className='btn mb-2 btn-secondary'
