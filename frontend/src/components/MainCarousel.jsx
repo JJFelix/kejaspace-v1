@@ -26,6 +26,7 @@ const MainCarousel = () => {
             </Carousel.Item>
           ))}
         </Carousel> */}
+        <img src={CarouselImage2} alt='CarouselImg' />
         <div className="welcome-tag">
           <p className="welcome-text">Welcome to KejaSpace. We will help you find your dream home</p>
         </div>

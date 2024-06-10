@@ -90,9 +90,15 @@ const NavBar = () => {
               </div>
             )}
             {userName && (
-              <Link to={"/login"} onClick={handleLogout} className="auth-links">
-                Logout
-              </Link>
+              <div className="auth-list">
+                <Link
+                  to={"/login"}
+                  onClick={handleLogout}
+                  className="auth-links"
+                >
+                  Logout
+                </Link>
+              </div>
             )}
           </>
         </div>
