@@ -136,7 +136,7 @@ const ViewHouses = (property) => {
                     {house.amenities.numberofBedrooms !== "" && (
                       <p>
                         <strong>Bedrooms</strong>{" "}
-                        <i class="fa fa-bed" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-bed" aria-hidden="true"></i>:{" "}
                         {house.amenities.numberofBedrooms} 
                       </p>
                     )}
@@ -146,7 +146,7 @@ const ViewHouses = (property) => {
                     {house.amenities.wardrobe !== "" && (
                       <p>
                         <strong>Wardrobe</strong>{" "}
-                        <i class="fa fa-th-large" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-th-large" aria-hidden="true"></i>:{" "}
                         {house.amenities.wardrobe}
                       </p>
                     )}
@@ -156,7 +156,7 @@ const ViewHouses = (property) => {
                     {house.amenities.numberofBathrooms !== "" && (
                       <p>
                         <strong>Bathrooms</strong>{" "}
-                        <i class="fa fa-bath" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-bath" aria-hidden="true"></i>:{" "}
                         {house.amenities.numberofBathrooms} 
                       </p>
                     )}
@@ -176,7 +176,7 @@ const ViewHouses = (property) => {
                     {house.amenities.water !== "" && (
                       <p>
                         <strong>Water</strong>{" "}
-                        <i class="fa fa-tint" aria-hidden="true"></i>: Ksh.{" "}
+                        <i className="fa fa-tint" aria-hidden="true"></i>: Ksh.{" "}
                         {house.amenities.water} per unit
                       </p>
                     )}
@@ -186,7 +186,7 @@ const ViewHouses = (property) => {
                     {house.amenities.electricity !== "" && (
                       <p>
                         <strong>Electricity</strong>{" "}
-                        <i class="fa fa-lightbulb" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-lightbulb" aria-hidden="true"></i>:{" "}
                         {house.amenities.electricity}
                       </p>
                     )}
@@ -196,7 +196,7 @@ const ViewHouses = (property) => {
                     {house.amenities.security !== "" && (
                       <p>
                         <strong>Security</strong>{" "}
-                        <i class="fa fa-male" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-male" aria-hidden="true"></i>:{" "}
                         {house.amenities.security}
                       </p>
                     )}
@@ -206,7 +206,7 @@ const ViewHouses = (property) => {
                     {house.amenities.cctv !== "" && (
                       <p>
                         <strong>CCTV</strong>{" "}
-                        <i class="fa fa-television" aria-hidden="true"></i>:{" "}
+                        <i className="fa fa-television" aria-hidden="true"></i>:{" "}
                         {house.amenities.cctv}
                       </p>
                     )}
@@ -234,7 +234,7 @@ const ViewHouses = (property) => {
                     {house.amenities.garbageCollection !== "" && (
                       <p>
                         <strong>Garbage</strong>{" "}
-                        <i class="fa fa-trash" aria-hidden="true"></i>: Ksh.
+                        <i className="fa fa-trash" aria-hidden="true"></i>: Ksh.
                         {house.amenities.garbageCollection}
                       </p>
                     )}

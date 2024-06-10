@@ -39,9 +39,9 @@ const PropertyCard = ({ property, onClick }) => {
       <div>
         <h4>{property.propertyTitle}</h4>   
         <hr />
-        <p><i class="fa fa-home" aria-hidden="true"></i> {property.houseCategory}</p>    
+        <p><i className="fa fa-home" aria-hidden="true"></i> {property.houseCategory}</p>    
         <p><i className="fa-solid fa-location-dot"></i> {mainlocation}, {subLocation}</p>
-        <p><i class="fa fa-road" aria-hidden="true"></i> {distanceFromMainRoad}  metres from Main road</p>
+        <p><i className="fa fa-road" aria-hidden="true"></i> {distanceFromMainRoad}  metres from Main road</p>
         <p><i className="fa-solid fa-hand-holding-dollar"></i> Ksh.{property.price}</p>
       </div>
       

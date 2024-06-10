@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { url1, url2 } from "../App.jsx";
 
 import Carousel from "react-bootstrap/Carousel";
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+
 import { Link } from "react-router-dom";
 
 const FeaturedProperties = () => {
@@ -146,12 +146,64 @@ const FeaturedProperties = () => {
     } */
   }
 
+  const handlePropertyImageClick = (propertyId) => {
+    const id = propertyId;
+    console.log(`Image ${id} clicked`);
+    navigate(`/viewhouses/${propertyId}`);
+  };
+
   // console.log(properties);
 
   return (
     <>
       <div>
-        <Carousel className="carousel2" fade>
+        <div className="listed-properties">
+          {searchedProperties.length > 0 ? (
+            searchedProperties.map((property, index) => (
+              <div className="listed-property" key={index}>
+                <strong>{property.propertyTitle}</strong>
+
+                <img
+                  src={property.images[0]}
+                  alt={property.propertyTitle}
+                  onClick={() => handlePropertyImageClick(property.propertyId)}
+                />
+              </div>
+            ))
+          ) : (
+            <div className="listed-property">Listed Property</div>
+          )}
+
+          {/* <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div>
+          <div className="listed-property">
+          Some Card Here
+          </div> */}
+        </div>
+
+        {/* <Carousel className="carousel2" fade>
           {properties.map((property, index) => (
             // property.images.length > 0
             // ? property.images.map((image, imgIndex) => (
@@ -169,7 +221,8 @@ const FeaturedProperties = () => {
             </Carousel.Item>
             // )) : null
           ))}
-        </Carousel>
+        </Carousel> */}
+
         <h2 className="search-tag">SEARCH YOUR PREFERRED PROPERTIES</h2>
       </div>
 
