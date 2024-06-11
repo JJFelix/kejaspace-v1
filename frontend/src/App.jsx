@@ -26,6 +26,7 @@ import ViewProperty from './pages/ViewProperty.jsx'
 import ViewUnit from './components/ViewUnit.jsx'
 import RequisitionList from './admin/RequisitionList.jsx'
 import RequisitionDetails from './admin/RequisitionDetails.jsx'
+
 export const url1 = 'http://localhost:5000/'
 export const url2 = 'https://backend.kejaspace.com/'
 

@@ -1,14 +1,19 @@
 import './Home.css'
 
 import FeaturedProperties from '../components/FeaturedProperties.jsx'
+import FeaturedProperties1 from '../components/FeaturedProperties1.jsx'
+import MainCarousel from '../components/MainCarousel.jsx'
 
 
 const Home = () =>{
 
     return (
         <div className='main-wrapper'>
-            <FeaturedProperties />
-           
+            {/* Carousel */}
+            <MainCarousel />
+            <br />
+            <h2>LISTED PROPERTIES</h2>
+            <FeaturedProperties />           
         </div>   
     )
 

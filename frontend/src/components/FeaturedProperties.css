@@ -1,54 +1,159 @@
+.carousel2 {
+    /* background-color: darkmagenta; */
+    padding: .5em;
+    height: 90vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: -2.35em;
+    justify-content: center;
+    /* box-shadow: 0 0 .125em rgb(0, 0, 0); */
+
+}
+
+.img-carousel{
+    /* margin: auto; */
+    /* width: 100%; */
+    height: 90vh; /* 100% */
+    /* background-color: rgb(128, 128, 128); */
+    padding: .5em 0 0 0;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    /* box-shadow: 0 0 .125em rgb(0, 0, 0); */
+}
+
+.img-carousel img{
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down; /* cover */
+}
+
+/* .img-carousel{
+    background-color: #352264;
+    height: 50vh;
+}
+.img-carousel img{
+    width: 100%;   
+    height: 100%;  
+    object-fit: cover;
+} */
+
+.listed-properties{
+    /* background-color: grey; */
+    width: 98%;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    flex-wrap: wrap;
+    padding: .5em;
+}
+
+.listed-property{
+    background-color:rgb(255, 255, 255);
+    width: 20%;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 .125em rgba(0, 0, 0, 0.561);
+    border-radius: .25em;
+    /* padding:.125em 0; */
+}
+
+.listed-property img{
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 0 0 .25em .25em;
+}
+
 .main-card{
     /* background-color: lightcoral; */
-    padding: 1px 20px;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: .5em;
     margin-bottom: 10px;
 }
 
+@keyframes search-tag {
+    0%   {color: black;}
+    /* 25%  {color: rgb(52, 52, 3);} */
+    /* 50%  {color: green ;} */
+    100% {color: blue;}
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-tag{
+    width: 80%;
+    margin:0 auto .5em;
+    /* color: red; */
+    animation: search-tag ease-out;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.search-bar{
+    /* position: relative; */
+    /* top: 170px;        */
+    background-color: #352264;
+    color: #ffffff;
+    width: 80%;
+    padding: 10px;
+    display: flex;
+    margin: auto;
+    margin-bottom: 2em;
+    border: none;
+    justify-content: center;
+    border-radius: .25em;
+}
+
 .houses{
+    /* background: grey; */
     display: flex;
     flex-wrap: wrap;
     gap:30px;
     justify-content: center;
-    /* background: blue; */
     margin:0 5%;
 }
-.search-bar{
-    position: absolute;
-    bottom: 170px;
-    
-    
-    
-    width: 50%;
-    padding: 10px;
-    display: flex;
-    margin: auto;
-    border: none;
-    justify-self: center;
-}
-
 
 .inner-card{
     width: 28%;
-    /* background-color: rgb(176, 134, 134); */
-    border-radius: 5px;
-    box-shadow: 0 0 .125em grey;
-    padding: 1px;
+    /* height: 70vh; */
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: 0 0 .25em rgba(0, 0, 0, 0.33);
     display: flex ;
     flex-direction: column;
-    position: relative;
-    margin-bottom: 50px;
-    height: fit-content;
+    margin-bottom: 2em;
     /* text-align: start; */
 }
 
+.inner-card:hover{
+    box-shadow: 0 0 .5em rgb(0, 0, 0);
+}
+.inner-card hr{
+    width: 80%;
+    margin: auto;
+}
+
 .inner-card p{
-    text-align: center;
-    margin-left: 10px;
+    text-align: left;
+    margin:3% 0 3% 20%;
 }
 
 .propert-image{
@@ -60,17 +165,14 @@
 .propert-image img{
     object-fit: cover;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     height: inherit;
 }
 
 .button{
     width: fit-content;
 }
-.carousel {
-    width: 100%;
-    height: 50%
-}
+
 .searchform {
     display: flex;
     
@@ -119,85 +221,71 @@
 }
 
 @media screen and (max-width: 778px){
-    .main-card{
-        display: flex;
-        /* flex-direction: column; */
-        /* flex-wrap: nowrap; */
-        justify-content: center;
-        overflow-x: scroll;
-        padding: 5px;
-    }
-
-    .houses{
-        margin: 0;
-    }
-    .inner-card{
-        /* width: 350px; */
+    .carousel2 {
+        /* background-color: grey; */
         width: 100%;
-    }    
-    .inner-card h4{
-        font-size: medium;
+        height: 50vh;
+        margin-bottom: 0;
     }
-    .modal-img-container img{
-        /* background-color: red; */
-        object-fit: contain;
-        box-shadow: .0125em .0125em .25em grey;
+    .img-carousel{
+        /* background-color: #352264; */
+        height: 50vh;
     }
-    .carousel {
-        width: 100%;
-        height: 50%
+    .img-carousel img{
+        width: 100%;   
+        height: 100%;  
+        object-fit: cover;
+    }
+    .listed-properties{
+        flex-direction: column;
+        width: 90%;
+        gap: 2em;
+    }
+    .listed-property{
+        width: 90%;
+        margin: auto;
+    }
+    .search-tag{
+        animation: none;
     }
     .search-bar{
-        position: absolute;
-        bottom: 100px;
-        width: 50%;
-        
+        width: 90%;
         display: flex;
-       
-        border: none;
-        justify-self: center;
+        justify-content: center;
+        height: auto;
     }
     .searchform {
         display: block;
-        
+        /* background-color: grey;    */
+        width: 80%; 
     }
+        .main-card{
+        /* background-color: lightcoral; */
+    }
+
+    .houses{
+        width: 90%;
+        flex-direction: column;
+    }
+    .inner-card{
+        width: 100%;
+    }    
+
+    /* .inner-card h4{
+        font-size: medium;
+    } */
+    /* .modal-img-container img{
+        background-color: red;
+        object-fit: contain;
+        box-shadow: .0125em .0125em .25em grey;
+    } */
 }
 
-.carousel{
-    justify-content: center;
-    /* background-color: blue; */
-    
-}
-
-
-.tag{
-    /* background-color: grey; */
-    /* padding: 10px; */
-    height: 90vh;
-    width: 100%;
-    margin: auto;
-    margin-bottom: 20px;
-}
-
-
-.img-carousel{
-    width: 100%;
-    height: 90vh;
-}
-
-.img-carousel img{
-    width: 100%;
-    height: 50%;
-    border-radius: 5px;
-}
-
-
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     .tag{
         height: 65vh;
     }
     .img-carousel{
         height: 65vh;
     }
-}
-
+} */
