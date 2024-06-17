@@ -174,6 +174,8 @@ const FeaturedProperties = () => {
             <div className="listed-property">Listed Property</div>
           )}
 
+{/*           change the listed properties information to replace  the current setup*/}
+
           {/* <div className="listed-property">
           Some Card Here
           </div>
