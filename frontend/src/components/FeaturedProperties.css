@@ -62,14 +62,14 @@
     justify-content: center;
     box-shadow: 0 0 .125em rgba(0, 0, 0, 0.561);
     border-radius: .25em;
-    /* padding:.125em 0; */
+    padding:.5em .5em;
 }
 
 .listed-property img{
     width: 100%;
     height: 90%;
     object-fit: cover;
-    border-radius: 0 0 .25em .25em;
+    border-radius: .25em;
 }
 
 .main-card{
