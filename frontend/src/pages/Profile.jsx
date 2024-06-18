@@ -94,7 +94,7 @@ const Profile = () => {
   const dummyImage = "/images/download.png";
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="main-wrapper">Loading...</div>;
   }
 
   return (
