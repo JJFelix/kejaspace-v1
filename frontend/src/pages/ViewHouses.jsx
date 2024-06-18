@@ -248,71 +248,17 @@ const ViewHouses = (property) => {
                       className="mx-auto justify-content-center"
                       src={call}
                       alt="Call Icon"
-                      onClick={() => handleCall(house.contact)}
+                      onClick={() => handleCall(`0` + house.contact)}
                     />
                   </div>
                   <h5
                     className=""
-                    onClick={() => copyToClipboard(house.contact)}
+                    onClick={() => copyToClipboard(`0` + house.contact)}
                   >
-                    Call {house.contact}
+                    Call {`0` + house.contact}
                   </h5>
                 </div>
-
-                {/* {house.amenities && Object.keys(house.amenities).length > 0 && (
-                  <div className="m-3 border-bottom">
-                    <h5>Amenities</h5>
-                    <ul style={{ listStyleType: "none" }}>
-                      {Object.entries(
-                        typeof house.amenities === "string"
-                          ? JSON.parse(house.amenities)
-                          : house.amenities
-                      )
-                        .filter(
-                          ([key, value]) =>
-                            value && value !== "no" && value !== "Not provided"
-                        )
-                        .map(([key, value]) => (
-                          <li key={key}>
-                            <strong>
-                              {key.charAt(0).toUpperCase() + key.slice(1)}:
-                            </strong>{" "}
-                            {typeof value === "object"
-                              ? Object.entries(value).map(
-                                  ([nestedKey, nestedValue]) => (
-                                    <span key={nestedKey}>
-                                      {nestedKey.charAt(0).toUpperCase() +
-                                        nestedKey.slice(1)}{" "}
-                                      : {nestedValue}{" "}
-                                    </span>
-                                  )
-                                )
-                              : value}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                )} */}
-
-                {/* <div>
-                  <div className=" align-items-center">
-                    <h5 className="mx-auto">Call</h5>
-                    <img
-                      className="mx-auto justify-content-center"
-                      src={call}
-                      alt="Call Icon"
-                      onClick={() => handleCall(house.contact)}
-                    />
-                  </div>
-                  <h5
-                    className=""
-                    onClick={() => copyToClipboard(house.contact)}
-                  >
-                    {house.contact}
-                  </h5>
-                </div> */}
               </div>
-
               {/*{userId == house.ownerId &&                        
                 (<div className='d-flex justify-content-center gap-2'>
                   <Link to={`/profile/updateadvert/${house.houseId}`} onClick={handleClickUpdate} className='btn btn-primary'>
