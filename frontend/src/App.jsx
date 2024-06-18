@@ -48,19 +48,16 @@ const App = () => {
             <Route path='/viewproperty/:propertyId' element={<Property />} />
             <Route path='/viewhouses/:propertyId' element={<ViewHouses />} />
             <Route path='/searchedProperties' element={<SearchedProperties />} />
+            <Route path="/viewunit/:propertyId/:houseId" element={<ViewUnit />} />
             {userName &&
               <>
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/admin' element={<AdminRoute />} />
                 <Route path='/addproperty' element={<AddProperties />} />
-                <Route path="/viewunit/:unitId" element={<ViewUnit />} />
                 <Route path="/viewProperty/:userId/:propertyId" element={<ViewProperty />} />
                 <Route path ='/requisitions' element={<RequisitionList/>}/>
                 <Route path='/requisitiondetails/:requisitionId' element={<RequisitionDetails/>}/>
-
-
-   
                 <Route path='/UploadRequisitionForm'  element={<UploadRequisitionForm/>}/>            
                 <Route path='addhouse/:propertyId' element={<AddHouse />} />
                 <Route path='/profile/deleteproperty/:propertyId' element={<DeleteProperty />} />
