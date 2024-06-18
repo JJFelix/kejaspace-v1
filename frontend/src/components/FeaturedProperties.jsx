@@ -177,6 +177,7 @@ const FeaturedProperties = () => {
           ) : (
             <div className="listed-property">Listed Property</div>
           )}
+          
         </div>
 
         {/* <Carousel className="carousel2" fade>
