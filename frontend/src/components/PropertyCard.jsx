@@ -12,11 +12,11 @@ const PropertyCard = ({ property, onClick }) => {
   //const image2 = images[1]
   // const dummyImage = 'https://picsum.photos/250/150'
   // const dummyImage2 = '/images/sieuwert-otterloo-aren8nutd1Q-unsplash_6aa03d5ded604be58cd5ea00efdb0a6d.jpg'
-  const sentenceCase = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
+  // const sentenceCase = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
   // const  = property.houseCategory.charAt(0).toUpperCase() + property.houseCategory.slice(1).toLowerCase();
   // console.log(property)
-  const amenities = property.amenities
-  const [vacantUnitsCount, setVacantUnitsCount] = useState(0);
+  // const amenities = property.amenities
+  // const [vacantUnitsCount, setVacantUnitsCount] = useState(0);
   const handleChangeVacancyStatus = (e) => {
     const { checked } = e.target;
     const vacancyStatus = checked ? 'vacant' : 'occupied';
@@ -24,10 +24,10 @@ const PropertyCard = ({ property, onClick }) => {
     console.log(`Property ${propertyId} is now ${vacancyStatus}`);
   }
 
-  useEffect(() => {
-    const vacantUnits = properties.filter(property => property.status === 'vacant');
-    setVacantUnitsCount(vacantUnits.length);
-  }, [properties]);
+  // useEffect(() => {
+  //   const vacantUnits = properties.filter(property => property.status === 'vacant');
+  //   setVacantUnitsCount(vacantUnits.length);
+  // }, [properties]);
 
 
   return (
@@ -61,7 +61,7 @@ const PropertyCard = ({ property, onClick }) => {
 
         <div className='d-flex justify-content-center gap-3'>
           <Link
-            to={`/viewhouses/${property.propertyId}`}
+            to={`/viewunit/${property.propertyId}/${property.houseId}`}
             className='btn mb-2 btn-secondary'
           >
             More info

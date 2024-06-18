@@ -129,7 +129,8 @@
     margin-left: 0;
   }
   .nav-links {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: normal;
   }
   .auth-list {
     /* background-color: darkgoldenrod; */

@@ -13,9 +13,9 @@ function Footer() {
                 </div>
                 <div className="footer-links">
                     <ul>
-                        <li><Link to={'/about'} className={'nav-link'}>About</Link></li>
-                        <li><Link to={'/contact'} className={'nav-link'}>Contact Us</Link></li>
-                        <li><Link to={'/policy'} className={'nav-link'}>Our Policy</Link></li>
+                        <li><Link to={'/'} className={'nav-link'}>About</Link></li>
+                        <li><Link to={'/'} className={'nav-link'}>Contact Us</Link></li>
+                        <li><Link to={'/'} className={'nav-link'}>Our Policy</Link></li>
                     </ul>
                 </div>
                 <div className="footer-social">
