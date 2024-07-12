@@ -188,11 +188,6 @@
     width: 40%;
 }
 
-.vacancy p{
-    /* text-align: center; */
-    /* background: #000; */
-}
-
 .vacancy:hover{
     background-color: blue;
 }
