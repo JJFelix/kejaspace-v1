@@ -89,7 +89,7 @@ const Property = () => {
 
   return (
     <div className="main-wrapper">
-      <h2>UNITS</h2>
+      <h2>YOUR UNITS</h2>
       {error && (
         <div className="alert alert-danger register-form">
           <p className="danger">{error}</p>

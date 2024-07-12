@@ -21,11 +21,13 @@ const FeaturedProperties = () => {
     houseCategory: "",
     min_price: 0,
     max_price: 100000,
-    location: "",
+    mainlocation: "",
   });
 
   const [searchedProperties, setSearchedProperties] = useState([]);
   const [searchedProperties2, setSearchedProperties2] = useState([]);
+
+  const [listedProperties, setListedProperties] = useState([]);
 
   const handlePropertyClick = (property) => {
     setSelectedProperty(property);
@@ -44,18 +46,30 @@ const FeaturedProperties = () => {
         }
         setSearchedProperties(response.data);
         extractCategories(response.data);
+
+        const uniqueObjects = [];
+        const seen = new Set();
+
+        for (const obj of response.data) {
+          const identifier = `${obj.propertyTitle}-${obj.propertyId}-${obj.profilePic}`;
+          if (!seen.has(identifier)) {
+            seen.add(identifier);
+            uniqueObjects.push(obj);
+          }
+        }
+
+        setListedProperties(uniqueObjects);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  {
-    useEffect(() => {
-      setSearchedProperties(properties);
-      console.log("searchedProperties 2", searchedProperties);
-    }, [properties]);
-  }
+  useEffect(() => {
+    setSearchedProperties(properties);
+    // console.log("searchedProperties 2", searchedProperties);
+    // console.log("Listed properties: ", listedProperties);
+  }, [properties]);
 
   const extractCategories = (properties) => {
     const categoriesSet = new Set();
@@ -81,7 +95,7 @@ const FeaturedProperties = () => {
       houseCategory: "",
       min_price: 0,
       max_price: 100000,
-      location: "",
+      mainlocation: "",
     });
     setSearchedProperties(properties);
     navigate("/");
@@ -89,28 +103,19 @@ const FeaturedProperties = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    {
-      /* console.log('properties 1', properties)
-    console.log('houseData', houseData)*/
-    }
+    console.log("properties 1", properties);
+    console.log("houseData", houseData);
+
     const filteredProperties = properties.filter((property) => {
-      const matchesType =
-        !houseData.houseType || property.houseType === houseData.houseType;
-      const matchesCategory =
-        !houseData.houseCategory ||
-        property.houseCategory === houseData.houseCategory;
-      const matchesLocation =
-        !houseData.location ||
-        (property.mainlocation &&
-          property.mainlocation.toLowerCase() ===
-            houseData.location.toLowerCase());
-      const matchesPrice =
-        property.price >= houseData.min_price &&
-        property.price <= houseData.max_price;
+      const matchesType = !houseData.houseType || property.houseType === houseData.houseType;
+      const matchesCategory = !houseData.houseCategory || property.houseCategory === houseData.houseCategory;
+      const matchesLocation =  houseData.mainlocation || (
+        property.mainlocation && property.mainlocation.toLowerCase() === houseData.mainlocation.toLowerCase());
+      const matchesPrice = property.price >= houseData.min_price && property.price <= houseData.max_price;
       return matchesType && matchesCategory && matchesLocation && matchesPrice;
     });
     setSearchedProperties(filteredProperties);
-    [];
+    // [];
 
     {
       /*if (houseData.houseType || houseData.houseCategory || houseData.location || houseData.min_price || houseData.max_price) {
@@ -148,8 +153,8 @@ const FeaturedProperties = () => {
 
   const handlePropertyImageClick = (propertyId) => {
     const id = propertyId;
-    console.log(`Image ${id} clicked`);
-    navigate(`/viewhouses/${propertyId}`);
+    // console.log(`Image ${id} clicked`);
+    navigate(`/viewhouses/${id}`);
   };
 
   // console.log(properties);
@@ -158,13 +163,12 @@ const FeaturedProperties = () => {
     <>
       <div>
         <div className="listed-properties">
-          {searchedProperties.length > 0 ? (
-            searchedProperties.map((property, index) => (
+          {listedProperties.length > 0 && listedProperties.length > 0 ? (
+            listedProperties.map((property, index) => (
               <div className="listed-property" key={index}>
                 <strong>{property.propertyTitle}</strong>
-
                 <img
-                  src={property.images[0]}
+                  src={"https://kejaspace.com/images/" + property.profilePic}
                   alt={property.propertyTitle}
                   onClick={() => handlePropertyImageClick(property.propertyId)}
                 />
@@ -173,36 +177,7 @@ const FeaturedProperties = () => {
           ) : (
             <div className="listed-property">Listed Property</div>
           )}
-
-{/*           change the listed properties information to replace  the current setup*/}
-
-          {/* <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div>
-          <div className="listed-property">
-          Some Card Here
-          </div> */}
+          
         </div>
 
         {/* <Carousel className="carousel2" fade>
@@ -230,10 +205,7 @@ const FeaturedProperties = () => {
 
       <div className="main-card">
         <div className="search-bar justify-content-center">
-          <form
-            className=" align-items-center   gap-3 searchform"
-            onSubmit={handleSubmit}
-          >
+          <form className=" align-items-center   gap-3 searchform" onSubmit={handleSubmit}>
             {/* <label htmlFor="houseType">Type: </label> */}
             <select
               name="houseType"
@@ -291,9 +263,9 @@ const FeaturedProperties = () => {
             />
             <input
               type="text"
-              name="location"
+              name="mainlocation"
               className="form-control m-1"
-              value={houseData.location}
+              value={houseData.mainlocation}
               onChange={handleChange}
               placeholder="Location"
             />
