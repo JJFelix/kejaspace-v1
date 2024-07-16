@@ -17,6 +17,8 @@ const Profile = () => {
   const [newUserRole, setNewUserRole] = useState("propertyManager");
   const [responseMessage, setResponseMessage] = useState("");
 
+  const [rightsModal, setRightsModal] = useState(false);
+
   useEffect(() => {
     localStorage.removeItem("propertyId");
     localStorage.removeItem("selectedHouse");
@@ -97,6 +99,11 @@ const Profile = () => {
     return <div className="main-wrapper">Loading...</div>;
   }
 
+  const closeModal = () => {
+    console.log("close clicked");
+    setRightsModal(false);
+  };
+
   return (
     <>
       <div className="main-wrapper">
@@ -111,12 +118,20 @@ const Profile = () => {
             Fill in the requisition form.
           </p>
         </div>
-
         <div className="links">
           {userDetails.privilage === "agent" ||
           userDetails.privilage === "admin" ||
           userDetails.privilage === "manager" ? (
             <div className="d-flex gap-3">
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={() => setRightsModal(true)}
+                data-bs-toggle="modal"
+                data-bs-target="rightsModal"
+              >
+                Grant rights
+              </button>
               <Link to={"/addproperty"} className="btn btn-primary">
                 Add Property
               </Link>
@@ -131,6 +146,51 @@ const Profile = () => {
           )}
         </div>
 
+        {userDetails.privilage === "admin" && (
+          // || userDetails.privilage === "agent"
+          <div className="grant-rights-section">
+            <h2 className="mt-3">Grant Rights to Users</h2>
+            <form onSubmit={handleGrantRights}>
+              <label htmlFor="userID" className="form-label">
+                User ID:
+                <input
+                  className="form-control"
+                  type="text"
+                  value={newUserId}
+                  onChange={(e) => setNewUserId(e.target.value)}
+                />
+              </label>
+              <br />
+              <label htmlFor="email" className="form-label">
+                Email:
+                <input
+                  className="form-control"
+                  type="email"
+                  value={newUserEmail}
+                  onChange={(e) => setNewUserEmail(e.target.value)}
+                />
+              </label>
+              <br />
+              <label htmlFor="role" className="form-label">
+                Role:
+                <select
+                  className="m-1 p-2 form-control"
+                  value={newUserRole}
+                  onChange={(e) => setNewUserRole(e.target.value)}
+                >
+                  <option value="propertyManager">Property Manager</option>
+                  <option value="agent">Agent</option>
+                </select>
+              </label>
+              <br />
+              <button type="submit" className="btn btn-success">
+                Grant Rights
+              </button>
+            </form>
+            {responseMessage && <p>{responseMessage}</p>}
+          </div>
+        )}
+
         {/* <div className="user-info">
           <div className="property-image">
             <img
@@ -139,11 +199,11 @@ const Profile = () => {
             />
           </div>
           <div className="user-details">
-            <h5>Name: {userDetails.firstName}</h5>
+            <h5>Name: {userDetails.firstName.charAt(0).toUpperCase() + userDetails.firstName.slice(1).toLowerCase()} {userDetails.lastName.charAt(0).toUpperCase() + userDetails.lastName.slice(1).toLowerCase()}</h5>
             <h5>Email: {userDetails.email}</h5>
+            <h5>Role: {userDetails.privilage}</h5>
           </div>
         </div> */}
-
         <div className="property-main-card">
           {propertyDetails.map((property) => (
             <div className="property-inner-card" key={property.propertyId}>
@@ -179,52 +239,88 @@ const Profile = () => {
             </div>
           ))}
         </div>
-
-        {userDetails.privilage === "admin" ||
-          (userDetails.privilage === "agent" && (
-            <div className="grant-rights-section">
-              <h2 className="mt-3">
-                <u>Grant Rights to Users</u>
-              </h2>
-              <form onSubmit={handleGrantRights}>
-                <label className="m-3">
-                  User ID:
-                  <input
-                    className="m-1"
-                    type="text"
-                    value={newUserId}
-                    onChange={(e) => setNewUserId(e.target.value)}
-                  />
-                </label>
-                <br />
-                <label className="m-3">
-                  Email:
-                  <input
-                    className="m-1"
-                    type="email"
-                    value={newUserEmail}
-                    onChange={(e) => setNewUserEmail(e.target.value)}
-                  />
-                </label>
-                <br />
-                <label className="mb-2">
-                  Role:
-                  <select
-                    className="m-1 p-2"
-                    value={newUserRole}
-                    onChange={(e) => setNewUserRole(e.target.value)}
-                  >
-                    <option value="propertyManager">Property Manager</option>
-                    <option value="agent">Agent</option>
-                  </select>
-                </label>
-                <br />
-                <button type="submit">Grant Rights</button>
-              </form>
-              {responseMessage && <p>{responseMessage}</p>}
-            </div>
-          ))}
       </div>
+
+      {rightsModal && (
+        <div
+          className="modal fade show grant-rights-modal"
+          id="rightsModal"
+          // data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="rightsModalLabel"
+          aria-hidden="true"
+          onClick={(e) => {
+            if (e.target.id === "rightsModal") {
+              closeModal();
+            }
+          }}
+        >
+          <div className="modal-dialog model-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header text-align-center">
+                <h3 className="modal-title">Grant Rights</h3>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={closeModal}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={handleGrantRights}>
+                  <label htmlFor="userID" className="form-label">
+                    User ID:
+                    <input
+                      className="form-control"
+                      type="text"
+                      value={newUserId}
+                      onChange={(e) => setNewUserId(e.target.value)}
+                    />
+                  </label>
+                  <br />
+                  <label htmlFor="email" className="form-label">
+                    Email:
+                    <input
+                      className="form-control"
+                      type="email"
+                      value={newUserEmail}
+                      onChange={(e) => setNewUserEmail(e.target.value)}
+                    />
+                  </label>
+                  <br />
+                  <label htmlFor="role" className="form-label">
+                    Role:
+                    <select
+                      className="m-1 p-2 form-control"
+                      value={newUserRole}
+                      onChange={(e) => setNewUserRole(e.target.value)}
+                    >
+                      <option value="propertyManager">Property Manager</option>
+                      <option value="agent">Agent</option>
+                    </select>
+                  </label>
+                  <br />
+                  <button type="submit" className="btn btn-success">
+                    Grant Rights
+                  </button>
+                </form>
+                {responseMessage && <p>{responseMessage}</p>}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  onClick={closeModal}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

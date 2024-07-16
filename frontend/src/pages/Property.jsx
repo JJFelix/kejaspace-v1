@@ -335,7 +335,7 @@ const Property = () => {
             </div>
           ))
         ) : (
-          <p>No houses available</p>
+          <p>No units available</p>
         )}
       </div>
       <br />
