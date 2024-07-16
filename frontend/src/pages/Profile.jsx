@@ -255,7 +255,7 @@ const Profile = () => {
             }
           }}
         >
-          <div className="modal-dialog model-dialog-centered">
+          <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header text-align-center">
                 <h3 className="modal-title">Grant Rights</h3>
