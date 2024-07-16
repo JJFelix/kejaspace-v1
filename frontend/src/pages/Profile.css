@@ -49,8 +49,6 @@
     justify-content: center;
 }
 
-
-
 .btn{
     width: max-content;
     margin: auto 0;
@@ -86,7 +84,34 @@
     height: 27vh;
 }
 
+.modal{
+    padding: 1em;
+}
+
+.modal-dialog{
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: .5em;
+}
+
+.modal-content{
+    /* background-color: lightblue; */
+    width: 100%;
+}
+
+/* .modal-body{
+    background-color: lightcoral;
+    width: 100%;
+} */
+
+
+
 @media screen and (max-width: 550px) {
+    .links{
+        flex-direction: column;
+    }
     .user-info{
         flex-direction: column;
         /* background-color: red; */
@@ -116,6 +141,10 @@
         flex-direction: row;
         gap: 10px;
         /* background-color: red; */
+    }
+    .modal-content{
+        /* background-color: grey; */
+        width: 500px;
     }
 }
 
