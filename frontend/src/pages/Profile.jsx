@@ -123,7 +123,7 @@ const Profile = () => {
           userDetails.privilage === "admin" ||
           userDetails.privilage === "manager" ? (
             <div className="d-flex gap-3">
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-success"
                 onClick={() => setRightsModal(true)}
@@ -131,7 +131,7 @@ const Profile = () => {
                 data-bs-target="rightsModal"
               >
                 Grant rights
-              </button>
+              </button> */}
               <Link to={"/addproperty"} className="btn btn-primary">
                 Add Property
               </Link>
@@ -241,86 +241,7 @@ const Profile = () => {
         </div>
       </div>
 
-      {rightsModal && (
-        <div
-          className="modal fade show grant-rights-modal"
-          id="rightsModal"
-          // data-bs-keyboard="false"
-          tabIndex="-1"
-          aria-labelledby="rightsModalLabel"
-          aria-hidden="true"
-          onClick={(e) => {
-            if (e.target.id === "rightsModal") {
-              closeModal();
-            }
-          }}
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header text-align-center">
-                <h3 className="modal-title">Grant Rights</h3>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={closeModal}
-                ></button>
-              </div>
-              <div className="modal-body">
-                <form onSubmit={handleGrantRights}>
-                  <label htmlFor="userID" className="form-label">
-                    User ID:
-                    <input
-                      className="form-control"
-                      type="text"
-                      value={newUserId}
-                      onChange={(e) => setNewUserId(e.target.value)}
-                    />
-                  </label>
-                  <br />
-                  <label htmlFor="email" className="form-label">
-                    Email:
-                    <input
-                      className="form-control"
-                      type="email"
-                      value={newUserEmail}
-                      onChange={(e) => setNewUserEmail(e.target.value)}
-                    />
-                  </label>
-                  <br />
-                  <label htmlFor="role" className="form-label">
-                    Role:
-                    <select
-                      className="m-1 p-2 form-control"
-                      value={newUserRole}
-                      onChange={(e) => setNewUserRole(e.target.value)}
-                    >
-                      <option value="propertyManager">Property Manager</option>
-                      <option value="agent">Agent</option>
-                    </select>
-                  </label>
-                  <br />
-                  <button type="submit" className="btn btn-success">
-                    Grant Rights
-                  </button>
-                </form>
-                {responseMessage && <p>{responseMessage}</p>}
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* {ri5173 */}
     </>
   );
 };
