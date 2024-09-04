@@ -39,6 +39,7 @@ const NavBar = () => {
       });
     localStorage.removeItem("sessionToken");
     localStorage.removeItem("userId");
+    localStorage.removeItem("user");
     localStorage.removeItem("userName");
     localStorage.removeItem("userName" + "_ts");
     localStorage.removeItem("propertyId");

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 export const setLocalStorageData = (key, value) => {
-  const expirationTime = Date.now() + 60 * 60 * 1000; // 1 hour in milliseconds
+  const expirationTime = Date.now() + 180 * 60 * 1000; // 3 hours in milliseconds
   localStorage.setItem(key + '_ts', expirationTime); // Store expiration timestamp
   localStorage.setItem(key, value);
 };

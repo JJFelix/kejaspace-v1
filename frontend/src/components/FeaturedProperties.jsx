@@ -137,20 +137,6 @@ const FeaturedProperties = () => {
     }
   };
 
-  {
-    /*const houseCategoryOptions = {
-        commercial: [
-            'office', 'godowns and warehouses', 'showrooms',
-            'shops and rental spaces', 'hotels and restaurants',
-            'rental halls'
-        ],
-        residential: [
-            'studio apartments', 'bedsitter', 'one bedroom',
-            'two bedroom', 'three bedroom', 'bungalow and mansion'
-        ]
-    } */
-  }
-
   const handlePropertyImageClick = (propertyId) => {
     const id = propertyId;
     // console.log(`Image ${id} clicked`);
@@ -158,6 +144,20 @@ const FeaturedProperties = () => {
   };
 
   // console.log(properties);
+
+  const houseCategoryOptions = {
+    commercial: [
+      'office spaces', 'godowns and warehouses', 'showrooms',
+      'shops and rental spaces', 'hotels and restaurants',
+      'rental halls'
+    ],
+    residential: [
+      'studio apartments', 'bedsitter', 'one bedroom',
+      'two bedroom', 'three bedroom', 'bungalow and mansion'
+    ]
+  };
+
+  const categoryOptions = houseCategoryOptions[houseData.houseType] || [];
 
   return (
     <>
@@ -229,11 +229,8 @@ const FeaturedProperties = () => {
               value={houseData.houseCategory}
               onChange={handleChange}
             >
-              <option value="" disabled>
-                Category
-              </option>
-
-              {categories.map((category, index) => (
+              {/* <option value="" disabled>Category</option> */}
+              {categories.map((category, index) => ( // change to categoryOptions soonest
                 <option key={index} value={category}>
                   {category}
                 </option>

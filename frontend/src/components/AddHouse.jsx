@@ -30,6 +30,20 @@ const AddHouse = () => {
     images: [],
   });
 
+  const houseCategoryOptions = {
+    commercial: [
+      'office spaces', 'godowns and warehouses', 'showrooms',
+      'shops and rental spaces', 'hotels and restaurants',
+      'rental halls'
+    ],
+    residential: [
+      'studio apartments', 'bedsitter', 'one bedroom',
+      'two bedroom', 'three bedroom', 'bungalow and mansion'
+    ]
+  };
+
+  const categoryOptions = houseCategoryOptions[houseData.houseType] || [];
+
   const navigate = useNavigate();
 
   const handleInputChange = async (e) => {
@@ -272,7 +286,7 @@ const AddHouse = () => {
             <label htmlFor="houseCategory" className="form-label">
               Unit Category
             </label>
-            <input
+            {/* <input
               name="houseCategory"
               value={houseData.houseCategory}
               onChange={handleInputChange}
@@ -280,19 +294,19 @@ const AddHouse = () => {
               className="form-control"
               id="houseCategory"
               aria-describedby="houseCategory"
-            />
-            {/*<select name="houseCategory" id="houseCategory" value={houseData.houseCategory} onChange={handleInputChange} className='form-select form-select-sm' aria-label=".form-select-sm example">
+            /> */}
+            <select name="houseCategory" id="houseCategory" value={houseData.houseCategory} onChange={handleInputChange} className='form-select form-select-sm' aria-label=".form-select-sm example">
               <option value=""></option>
               {categoryOptions.map((category) => (
                   <option key={category} value={category}>
                     {category}
                 </option>
               ))}
-            </select>*/}
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="price" className="form-label">
-              Rent
+              Rent in Ksh.
             </label>
             <input
               name="price"
@@ -344,13 +358,16 @@ const AddHouse = () => {
               <option value="second">Second</option>
               <option value="third">Third</option>
               <option value="fourth">Fourth</option>
+              <option value="fifth">Fifth</option>
+              <option value="sixth">Sixth</option>
+              <option value="seventh">Seventh</option>
               {/* Add more levels if needed */}
             </select>
           </div>
 
           <div className="mb-3">
             <label htmlFor="sizeOfUnit" className="form-label">
-              Size of the Unit
+              Size of the Unit (in Sq metres)
             </label>
             <input
               name="sizeOfUnit"
@@ -568,6 +585,23 @@ const AddHouse = () => {
               multiple
               aria-describedby="images"
             />
+          </div>
+          <div className="d-flex mb-3">
+            {houseData.images.map((image, index) => (
+              <div key={index} >
+                <img
+                  src={image}
+                  alt={`House Image ${index + 1}`}
+                  className="img-thumbnail"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    marginRight: "10px",
+                  }}
+                />
+              </div>
+            ))}
           </div>
           <div className="d-flex">
             <button type="submit" className=" button btn btn-primary">
